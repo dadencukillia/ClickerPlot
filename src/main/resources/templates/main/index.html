@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main Page</title>
+</head>
+<body>
+    Clicks: <span th:text="${clicks}" class="counter"></span>
+    <br>
+    <button onClick="cl()">Click</button>
+    <script>
+        const cl = () => {
+            fetch("/click_n_get")
+              .then((response) => response.json())
+              .then((data) => {document.getElementsByClassName("counter")[0].innerText = data});
+        }
+        setInterval(() => {
+            fetch("/get")
+                  .then((response) => response.json())
+                  .then((data) => {document.getElementsByClassName("counter")[0].innerText = data});
+        }, 200);
+    </script>
+</body>
+</html>
